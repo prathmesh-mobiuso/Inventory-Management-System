@@ -1,0 +1,50 @@
+public class Video {
+
+	String title;
+	boolean availableFlag;
+	double rating;
+	
+	Video(String title,boolean availableFlag,double rating){
+		this.title=title;
+		this.availableFlag=true;
+		this.rating=rating;
+	}
+	
+	public static boolean beingCheckedOut(Video videoObject[],int i) {
+		
+		if(videoObject[i].availableFlag==false) { 
+			return false;
+		}
+		else {
+			videoObject[i].availableFlag=false;
+			return true;					
+		}
+		
+	}
+	
+	public static boolean beingReturn(Video videoObject[],int i) {
+		
+		if(videoObject[i].availableFlag==false) {
+			videoObject[i].availableFlag=true;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+	
+	public static void receiveRating(Video videoObject[],int i,double rating) {
+		
+		double previousRating=videoObject[i].rating;
+		double newRating=(previousRating+rating)/2;
+		videoObject[i].rating=newRating;
+		System.out.println("Name Of File \t Updated Rating");
+		for(int a=0;a<videoObject.length;a++) {
+			if(videoObject[a]!=null) {
+				System.out.println(videoObject[a].title+"  \t\t  "+videoObject[a].rating);
+			}
+		}	
+	}
+}
