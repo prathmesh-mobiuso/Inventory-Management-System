@@ -1,0 +1,105 @@
+import java.util.*;
+
+public class VideoStore {
+	
+	static Video[] videoObject=new Video[10];
+	static int a=0;
+	
+	public static void addVideo(String name) {	
+		if(a<10) {
+		Scanner ss=new Scanner(System.in);
+		System.out.println("Enter the rating = ");
+		double r=ss.nextDouble();
+		
+		videoObject[a]=new Video(name,true,r);
+		a++;
+		System.out.println("Status :- '"+name +"' file added sucessfully");
+		}
+		else
+		{
+			System.out.println("Store inventory is full");
+		}
+	}
+	
+	public static void checkOut(String name) {
+		int fileFinder=0;
+		for(int i=0;i<videoObject.length;i++) {
+		if((videoObject[i])!=null) 
+		{
+				if((videoObject[i].title).equals(name))
+				{
+					fileFinder++;
+					if(Video.beingCheckedOut(videoObject, i))
+					{
+						System.out.println("Status :- '"+videoObject[i].title+"' file succesfully checkout");
+						videoObject[i].availableFlag=false;
+						break;
+					}
+					else
+					{
+						System.out.println("Status :- '"+videoObject[i].title+"' file is out of stock");
+					}					
+				}
+			}	
+		}
+		if(fileFinder==0) {
+			System.out.println("No file found");
+		}
+	}
+	
+	public static void returnVideo(String name) {
+		int fileFinder=0;
+		for(int i=0;i<videoObject.length;i++) {
+		if(videoObject[i]!=null) 
+		{
+				if((videoObject[i].title).equals(name))
+				{
+					fileFinder++;
+					if(Video.beingReturn(videoObject, i))
+					{
+						System.out.println("Status :- '"+videoObject[i].title+"' file succesfully returned");
+						
+					}
+					else
+					{
+						System.out.println("Status :- '"+videoObject[i].title+"' is already present");
+					}
+				}
+			}			
+		}
+		if(fileFinder==0) {
+			System.out.println("No file found");
+		}
+	}
+	
+	
+	public static void receiveRating(String user,String name,double rating) {
+		int fileFinder=0;
+		for(int i=0;i<videoObject.length;i++) {
+			if(videoObject[i]!=null) 
+			{
+					if((videoObject[i].title).equals(name))
+					{
+						fileFinder++;
+						Video.receiveRating(videoObject, i, rating);
+					}
+			}
+		}
+		if(fileFinder==0) {
+			System.out.println("No file found");
+		}
+	}
+	
+	public static void listInventory() {
+		System.out.println("Printing the Inventory of the store :-");
+		int index=1;
+		
+		for(int i=0;i<videoObject.length;i++) {
+			
+			if((videoObject[i]!=null) && (videoObject[i].availableFlag==true)) {
+				System.out.println((index++)+". "+videoObject[i].title);
+			}
+		}
+	}
+
+}
