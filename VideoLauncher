@@ -1,69 +1,74 @@
+
 import java.util.*;
 
 public class VideoLauncher {
 
-	public static void main(String[] args) {
-		
+	public void getChoiceFromUser() {
 		Scanner scan1=new Scanner(System.in);
+		System.out.println("----- Welcome to Video store -----");
+		System.out.println("1.Add Video\n2.Checkout Video\n3.Return Video \n4.Check Inventory\n5.Rate the Video File");
+		System.out.println("Enter your choice = ");
+		
+		int choice=scan1.nextInt();
+		switch(choice) {
+		case 1:
+		{
+			Scanner scan=new Scanner(System.in);
+			System.out.println("Enter the file name = ");
+			String name=scan.next();
+			VideoStore.addVideo(name);
+			break;
+		}
+		case 2: 
+		{
+			Scanner scan=new Scanner(System.in);
+			VideoStore.listInventory();
+			System.out.println("Enter the file name to check out = ");
+			String name=scan.nextLine();
+			VideoStore.checkOut(name);
+			break;
+		}
+		case 3:
+		{
+			Scanner scan=new Scanner(System.in);
+			System.out.println("Enter the file name to returned = ");
+			String name=scan.nextLine();
+			VideoStore.returnVideo(name);
+			break;
+		}
+		case 4:
+		{
+			VideoStore.listInventory();
+			break;
+		}
+		case 5:
+		{
+			Scanner scan=new Scanner(System.in);
+			System.out.println("Enter user name =  ");
+			String user=scan.next();
+			VideoStore.listInventory();
+			System.out.println("Enter the file name to add the rating = ");
+			String name=scan.next();
+			System.out.println("Enter the rating [out of 10] = ");
+			double rating=scan1.nextDouble();
+			VideoStore.receiveRating(user,name, rating);
+			break;				
+		}
+		default:
+		{
+			System.out.println("Wrong input");
+		}
+		}
+	}
+	
+	public static void main(String[] args) {		
+		VideoLauncher videoLauncher=new VideoLauncher();
+		Scanner sc=new Scanner(System.in);
 		char ch;
 		do {
-			System.out.println("----- Welcome to Video store -----");
-			System.out.println("1.Add Video\n2.Checkout Video\n3.Return Video \n4.Check Inventory\n5.Rate the Video File");
-			System.out.println("Enter your choice = ");
-			
-			int choice=scan1.nextInt();
-			switch(choice) {
-			case 1:
-			{
-				Scanner scan=new Scanner(System.in);
-				System.out.println("Enter the file name = ");
-				String name=scan.next();
-				VideoStore.addVideo(name);
-				break;
-			}
-			case 2: 
-			{
-				Scanner scan=new Scanner(System.in);
-				VideoStore.listInventory();
-				System.out.println("Enter the file name to check out = ");
-				String name=scan.nextLine();
-				VideoStore.checkOut(name);
-				break;
-			}
-			case 3:
-			{
-				Scanner scan=new Scanner(System.in);
-				System.out.println("Enter the file name to returned = ");
-				String name=scan.nextLine();
-				VideoStore.returnVideo(name);
-				break;
-			}
-			case 4:
-			{
-				VideoStore.listInventory();
-				break;
-			}
-			case 5:
-			{
-				Scanner scan=new Scanner(System.in);
-				System.out.println("Enter user name =  ");
-				String user=scan.next();
-				VideoStore.listInventory();
-				System.out.println("Enter the file name to add the rating = ");
-				String name=scan.next();
-				System.out.println("Enter the rating [out of 10] = ");
-				double rating=scan1.nextDouble();
-				VideoStore.receiveRating(user,name, rating);
-				break;				
-			}
-			default:
-			{
-				System.out.println("Wrong input");
-			}
-			}
-			
+			videoLauncher.getChoiceFromUser();
 			System.out.println("Do you want to continue press y");
-			ch=scan1.next().charAt(0);
+			ch=sc.next().charAt(0);
 			
 			}while(ch=='y');
 	}
