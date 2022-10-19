@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class VideoLauncher {
@@ -16,7 +15,7 @@ public class VideoLauncher {
 			Scanner scan=new Scanner(System.in);
 			System.out.println("Enter the file name = ");
 			String name=scan.next();
-			VideoStore.addVideo(name);
+			System.out.println(VideoStore.addVideo(name));
 			break;
 		}
 		case 2: 
@@ -25,7 +24,7 @@ public class VideoLauncher {
 			VideoStore.listInventory();
 			System.out.println("Enter the file name to check out = ");
 			String name=scan.nextLine();
-			VideoStore.checkOut(name);
+			System.out.println(VideoStore.checkOut(name));
 			break;
 		}
 		case 3:
@@ -33,7 +32,7 @@ public class VideoLauncher {
 			Scanner scan=new Scanner(System.in);
 			System.out.println("Enter the file name to returned = ");
 			String name=scan.nextLine();
-			VideoStore.returnVideo(name);
+			System.out.println(VideoStore.returnVideo(name));
 			break;
 		}
 		case 4:
