@@ -5,23 +5,19 @@ public class VideoStore {
 	static Video[] videoObject=new Video[10];
 	static int a=0;
 	
-	public static void addVideo(String name) {	
-		if(a<10) {
-		Scanner ss=new Scanner(System.in);
-		System.out.println("Enter the rating = ");
-		double r=ss.nextDouble();
-		
-		videoObject[a]=new Video(name,true,r);
+	public static String addVideo(String name) {	
+		if(a<10) {		
+		videoObject[a]=new Video(name,true,10);
 		a++;
-		System.out.println("Status :- '"+name +"' file added sucessfully");
+		return "Status :- '"+name +"' file added sucessfully";
 		}
 		else
 		{
-			System.out.println("Store inventory is full");
-		}
+			return "Store inventory is full";
+		}	
 	}
 	
-	public static void checkOut(String name) {
+	public static String checkOut(String name) {
 		int fileFinder=0;
 		for(int i=0;i<videoObject.length;i++) {
 		if((videoObject[i])!=null) 
@@ -31,23 +27,24 @@ public class VideoStore {
 					fileFinder++;
 					if(Video.beingCheckedOut(videoObject, i))
 					{
-						System.out.println("Status :- '"+videoObject[i].title+"' file succesfully checkout");
 						videoObject[i].availableFlag=false;
-						break;
+						return "Status :- '"+videoObject[i].title+"' file succesfully checkout";
+						
 					}
 					else
 					{
-						System.out.println("Status :- '"+videoObject[i].title+"' file is out of stock");
+						return "Status :- '"+videoObject[i].title+"' file is out of stock";
 					}					
 				}
 			}	
 		}
 		if(fileFinder==0) {
-			System.out.println("No file found");
+			return "No file found";
 		}
+		return null;
 	}
 	
-	public static void returnVideo(String name) {
+	public static String returnVideo(String name) {
 		int fileFinder=0;
 		for(int i=0;i<videoObject.length;i++) {
 		if(videoObject[i]!=null) 
@@ -57,19 +54,20 @@ public class VideoStore {
 					fileFinder++;
 					if(Video.beingReturn(videoObject, i))
 					{
-						System.out.println("Status :- '"+videoObject[i].title+"' file succesfully returned");
+						return "Status :- '"+videoObject[i].title+"' file succesfully returned";
 						
 					}
 					else
 					{
-						System.out.println("Status :- '"+videoObject[i].title+"' is already present");
+						return "Status :- '"+videoObject[i].title+"' is already present";
 					}
 				}
 			}			
 		}
 		if(fileFinder==0) {
-			System.out.println("No file found");
+			return "No file found";
 		}
+		return null;
 	}
 	
 	
