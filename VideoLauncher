@@ -2,8 +2,11 @@ import java.util.*;
 
 public class VideoLauncher {
 
+	
 	public void getChoiceFromUser() {
 		Scanner scan1=new Scanner(System.in);
+		Scanner scan=new Scanner(System.in);
+		VideoStore videostore=new VideoStore();
 		System.out.println("----- Welcome to Video store -----");
 		System.out.println("1.Add Video\n2.Checkout Video\n3.Return Video \n4.Check Inventory\n5.Rate the Video File");
 		System.out.println("Enter your choice = ");
@@ -12,45 +15,42 @@ public class VideoLauncher {
 		switch(choice) {
 		case 1:
 		{
-			Scanner scan=new Scanner(System.in);
 			System.out.println("Enter the file name = ");
 			String name=scan.next();
-			System.out.println(VideoStore.addVideo(name));
+			videostore.addVideo(name);
 			break;
 		}
 		case 2: 
 		{
-			Scanner scan=new Scanner(System.in);
-			VideoStore.listInventory();
+			videostore.listInventory();
 			System.out.println("Enter the file name to check out = ");
 			String name=scan.nextLine();
-			System.out.println(VideoStore.checkOut(name));
+			videostore.checkOut(name);
 			break;
 		}
 		case 3:
 		{
-			Scanner scan=new Scanner(System.in);
 			System.out.println("Enter the file name to returned = ");
 			String name=scan.nextLine();
-			System.out.println(VideoStore.returnVideo(name));
+			videostore.returnVideo(name);
 			break;
 		}
 		case 4:
 		{
-			VideoStore.listInventory();
+			System.out.println("Printing the Inventory of the store :-");
+			videostore.listInventory();
 			break;
 		}
 		case 5:
 		{
-			Scanner scan=new Scanner(System.in);
 			System.out.println("Enter user name =  ");
 			String user=scan.next();
-			VideoStore.listInventory();
+			videostore.listInventory();
 			System.out.println("Enter the file name to add the rating = ");
 			String name=scan.next();
 			System.out.println("Enter the rating [out of 10] = ");
 			double rating=scan1.nextDouble();
-			VideoStore.receiveRating(user,name, rating);
+			videostore.receiveRating(user,name, rating);
 			break;				
 		}
 		default:
