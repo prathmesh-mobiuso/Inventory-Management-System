@@ -12,12 +12,12 @@ public class Video {
 	
 	public static boolean beingCheckedOut(Video videoObject[],int i) {
 		
-		if(videoObject[i].availableFlag==false) { 
+		if(videoObject[i].availableFlag==false) { //if it is not available
 			return false;
 		}
 		else {
 			videoObject[i].availableFlag=false;
-			return true;					
+			return true;					//if it is available
 		}
 		
 	}
@@ -32,10 +32,9 @@ public class Video {
 		{
 			return false;
 		}
-		
 	}
 	
-	public static void receiveRating(Video videoObject[],int i,double rating) {
+	public static boolean receiveRating(Video videoObject[],int i,double rating) {
 		
 		double previousRating=videoObject[i].rating;
 		double newRating=(previousRating+rating)/2;
@@ -44,7 +43,9 @@ public class Video {
 		for(int a=0;a<videoObject.length;a++) {
 			if(videoObject[a]!=null) {
 				System.out.println(videoObject[a].title+"  \t\t  "+videoObject[a].rating);
+				continue;
 			}
-		}	
+		}
+		return false;
 	}
 }
