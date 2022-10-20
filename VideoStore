@@ -1,23 +1,27 @@
-import java.util.*;
+package com.inventory.sourcecode;
+
+import java.util.Scanner;
 
 public class VideoStore {
 	
 	static Video[] videoObject=new Video[10];
 	static int a=0;
 	
-	public static String addVideo(String name) {	
+	public boolean addVideo(String name) {	
 		if(a<10) {		
 		videoObject[a]=new Video(name,true,10);
 		a++;
-		return "Status :- '"+name +"' file added sucessfully";
+		System.out.println("Status :- '"+name +"' file added sucessfully");
+		return true;
 		}
 		else
 		{
-			return "Store inventory is full";
+			System.out.println("Store inventory is full");
+			return false;
 		}	
 	}
 	
-	public static String checkOut(String name) {
+	public boolean checkOut(String name) {
 		int fileFinder=0;
 		for(int i=0;i<videoObject.length;i++) {
 		if((videoObject[i])!=null) 
@@ -28,23 +32,25 @@ public class VideoStore {
 					if(Video.beingCheckedOut(videoObject, i))
 					{
 						videoObject[i].availableFlag=false;
-						return "Status :- '"+videoObject[i].title+"' file succesfully checkout";
-						
+						System.out.println("Status :- '"+videoObject[i].title+"' file successfully checkout");
+						return true;
 					}
 					else
 					{
-						return "Status :- '"+videoObject[i].title+"' file is out of stock";
+						System.out.println("Status :- '"+videoObject[i].title+"' file is out of stock");
+						return false;
 					}					
 				}
 			}	
 		}
 		if(fileFinder==0) {
-			return "No file found";
+			System.out.println("No file found");
+			return false;
 		}
-		return null;
+		return false;
 	}
 	
-	public static String returnVideo(String name) {
+	public boolean returnVideo(String name) {
 		int fileFinder=0;
 		for(int i=0;i<videoObject.length;i++) {
 		if(videoObject[i]!=null) 
@@ -54,24 +60,27 @@ public class VideoStore {
 					fileFinder++;
 					if(Video.beingReturn(videoObject, i))
 					{
-						return "Status :- '"+videoObject[i].title+"' file succesfully returned";
+						System.out.println( "Status :- '"+videoObject[i].title+"' file successfully returned");
+						return true;
 						
 					}
 					else
 					{
-						return "Status :- '"+videoObject[i].title+"' is already present";
+						System.out.println( "Status :- '"+videoObject[i].title+"' is already present");
+						return false;
 					}
 				}
 			}			
 		}
 		if(fileFinder==0) {
-			return "No file found";
+			System.out.println( "No file found");
+			return false;
 		}
-		return null;
+		return false;
 	}
 	
 	
-	public static void receiveRating(String user,String name,double rating) {
+	public boolean receiveRating(String user,String name,double rating) {
 		int fileFinder=0;
 		for(int i=0;i<videoObject.length;i++) {
 			if(videoObject[i]!=null) 
@@ -80,24 +89,28 @@ public class VideoStore {
 					{
 						fileFinder++;
 						Video.receiveRating(videoObject, i, rating);
+						continue;
 					}
 			}
+			return false;
 		}
 		if(fileFinder==0) {
 			System.out.println("No file found");
+			return false;
 		}
+		return false;
 	}
 	
-	public static void listInventory() {
-		System.out.println("Printing the Inventory of the store :-");
+	public boolean listInventory() {
 		int index=1;
-		
 		for(int i=0;i<videoObject.length;i++) {
 			
 			if((videoObject[i]!=null) && (videoObject[i].availableFlag==true)) {
 				System.out.println((index++)+". "+videoObject[i].title);
+				continue ;
 			}
 		}
+		return false;
 	}
 
 }
